@@ -1,0 +1,18 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "API mamalona",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "UPIITA",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "firebase-admin": "^5.12.1",
+    "mongoose": "^5.2.1",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.18.3"
+  }
+}
