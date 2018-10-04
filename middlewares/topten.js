@@ -5,10 +5,10 @@ var db = admin.firestore();
 
 async function topten( req , res){
     try {
-        p1= await Lugares.find({numero: {$gt:8}}).limit(5).sort({ranking: -1}).select('-_id name ranking img properties.schedule properties.description');
-        p2= await Lugares.find().sort({numero:-1, ranking:1}).limit(5).select('-_id name ranking img properties.schedule properties.description');
+        p1= await Lugares.find({numero: {$gt:8}}).limit(5).sort({ranking: -1}).select('-_id name img properties.schedule properties.description location.latitude location.longitude');
+        p2= await Lugares.find().sort({numero:-1, ranking:1}).limit(5).select('-_id name img properties.schedule properties.description location.latitude location.longitude');
         
-        total = p1.concat(p2);
+        total = p1.concat(p2);        
         total.forEach(element => {
             var addDoc = db.collection('topten').add(JSON.parse(JSON.stringify(element)))
         });

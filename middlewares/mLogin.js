@@ -11,8 +11,9 @@ var db = admin.firestore();
 
 var toptenp = require('./toptenp');
 
-async function mLogin( req , res){  
-    registro = await Usuario.find({mail:req.body.email},'_id');
+async function mLogin( req , res){      
+    
+    registro = await Usuario.find({mail:req.body.correo},'_id');
     
     if (registro.length == 0) { //no existe registro con ese correo entonces lo creo
         
@@ -22,11 +23,11 @@ async function mLogin( req , res){
         //creo registro en mongo
         let user = { 
             name: req.body.nombre,
-            mail: req.body.email,
-            img: req.body.imagen || null,
-            provider: req.body.provider,
-            psw: req.body.contrasena || ':)',
+            mail: req.body.correo,
             vector: req.body.vector,
+            provider: req.body.proveedor,
+            psw: req.body.contrasena || ':)',
+            flag: req.body.flag,
             ref: addDoc.path
         };
         //creo topten personal
@@ -41,15 +42,15 @@ async function mLogin( req , res){
                 } 
                 else{
                     //usuario creado correctamente
-                    return res.status(200).json({nombre: small.name, email: small.email, img: small.img, ok:true, urlfirebase: small.ref});
+                    return res.status(200).json({ok:true, urlfirebase: small.ref});
                 }
           });
           
     } else {
         //si existe el registro busco datos
-        Usuario.findOne({ '_id': registro }, 'name img ref', function (err, person) {
+        Usuario.findOne({ '_id': registro }, 'name ref', function (err, person) {
             if (err) return handleError(err);
-            return res.status(200).json({nombre: person.name, email: small.email, img: person.img, ok:true, urlfirebase: person.ref});
+            return res.status(200).json({ok:true, urlfirebase: person.ref});
           });
     }
       

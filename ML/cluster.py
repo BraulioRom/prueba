@@ -32,7 +32,7 @@ def init():
     from sklearn.externals import joblib
     joblib.dump(kmeans, 'modelo.pkl') 
     
-   otra=joblib.load('modelo.pkl')
+    otra=joblib.load('modelo.pkl')
     otra.predict(vector)
     
 
